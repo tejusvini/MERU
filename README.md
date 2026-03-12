@@ -177,7 +177,7 @@ meru
 
 ## License
 
-TBD
+Apache License 2.0
 
 ---
 
