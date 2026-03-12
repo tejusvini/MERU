@@ -228,7 +228,119 @@ PROG(SYMMETRY) = PROG[
 Both forms are valid.
 
 ---
+Position System
 
+MERU patterns may optionally reference positions in the triad lattice.
+The pattern language does not construct the grid; the triad engine provides the coordinate space.
+
+Positions answer the question:
+
+WHERE does the pattern occur?
+
+Patterns may contain:
+
+position + logic
+logic only
+position only
+Origin
+
+The default reference point is the origin.
+
+@
+
+Equivalent to:
+
+ROW 0
+SPINE
+
+If no position is specified, MERU assumes the origin.
+
+Row Movement
+
+Rows extend in two directions from the origin.
+
++row  → north
+-row  → south
+
+Movement is expressed using operators:
+
+>n@  move south n rows
+<n@  move north n rows
+
+Examples:
+
+>1@
+>2@
+<1@
+<3@
+Columns
+
+The triad grid has three columns:
+
+W   S   E
+
+Meaning:
+
+W = west
+S = spine
+E = east
+
+Column can be attached to a row position.
+
+Examples:
+
+>2.W@
+>2.E@
+<1.W@
+
+If no column is specified, spine is assumed.
+
+Apex
+
+The lattice has a structural apex.
+
+ROW -2
+SPINE only
+
+No lateral nodes exist at this row.
+
+Example reference:
+
+>2@
+Position + Logic
+
+Logic may be attached to a position using brackets.
+
+Example:
+
+>2.W@[&[#[5]]]
+
+Meaning:
+
+at row -2 west
+repeat value 5
+
+Parser output:
+
+POS(row=-2, col=W)
+   └ repeat
+      └ value 5
+Example Patterns
+
+Repeat pattern at origin
+
+@[&[#[5]]]
+
+Mirror across the spine
+
+%[
+>1.W@
+>1.E@
+]
+
+Repeat pattern two rows south west
+
+>2.W@[&[#[5]]]
 # Design Principles
 
 The MERU Pattern Language follows several principles:
@@ -244,6 +356,6 @@ It does not attempt to choose a single correct interpretation.
 
 ---
 
-# Status
+
 
 The language is currently experimental and evolving alongside the MERU structural engine.
