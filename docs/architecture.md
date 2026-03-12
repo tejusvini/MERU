@@ -6,6 +6,11 @@ Each component performs a single transformation on the input.
 The architecture intentionally separates **structure discovery** from **statistical inference**.
 
 ---
+The triad system defines the geometric lattice.
+
+The MERU Pattern Language (MPL) does not construct this grid.
+It only describes structural relationships within it using
+values, positions, and logic operators.
 
 ## Processing Pipeline
 
