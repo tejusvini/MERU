@@ -1,6 +1,6 @@
 # MERU
 
-**MERU** is a structural pattern engine that detects and generates patterns using a minimal operator language on a geometric lattice.
+**MERU** is a structural pattern engine that detects and represents patterns using a minimal operator language on a geometric lattice.
 
 Unlike statistical models, MERU analyzes sequences by discovering **structural invariants** such as symmetry, repetition, and growth. These structures are represented on a triad grid and expressed through a small set of operators.
 
