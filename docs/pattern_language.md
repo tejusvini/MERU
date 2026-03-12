@@ -1,148 +1,249 @@
 # MERU Pattern Language (MPL)
 
-The MERU Pattern Language (MPL) is a compact notation for describing structural patterns.
+The MERU Pattern Language (MPL) is a structural language for describing relationships between patterns discovered in data.
 
-Instead of describing procedural steps, MPL describes **relationships between elements**.
+MPL does not parse raw input directly. Instead, it operates on structural features produced by the MERU perception pipeline:
+
+raw input  
+→ quantizer  
+→ triad grid  
+→ sensory system  
+→ pattern engine  
+→ MPL expressions
+
+The language describes **structural relationships**, not raw data.
+
+MERU does not attempt to find a single correct interpretation.  
+Multiple valid structural descriptions may exist simultaneously.
 
 ---
 
-## Operator Set
+# Core Syntax Rule
 
-MERU currently uses a minimal operator set.
+All structural expressions follow a single rule:
 
 
-@ anchor
+operator[object]
+
+
+This rule applies uniformly across the language.
+
+Examples:
+
+
+#[5]
+@[6]
+%[&[#[5]]]
+
+[#[8]]
+
+
+This structure produces a deterministic expression tree that is easy for machines to parse.
+
+---
+
+# Structural Operators
+
+MERU uses a minimal operator set.
+
+self / value
+
+@ observer
 % mirror
 & repeat
-#> grow
-#< shrink
+
+grow
+< lookback
 
 
-Each operator represents a structural transformation.
+Examples:
+
+
+#[5]
+
+
+Represents a structural element with value `5`.
+
+
+&[#[5]]
+
+
+Repeat the element `5`.
+
+
+%[&[#[5]]]
+
+
+Mirror the repeated structure.
+
+
+@[6]
+
+
+Observer positioned at location `6`.
 
 ---
 
-## Operator Meanings
+# Default Observer
 
-### Anchor (@)
+If no observer position is specified:
 
-Marks a structural reference point.
+
+@[]
+
+
+The observer defaults to the structural center detected by the system.
+
+---
+
+# Pattern Definitions
+
+Patterns are reusable structural descriptions.
+
+Syntax:
+
+
+PTRN(name) = expression
+
 
 Example:
 
 
-@1
+PTRN(MIRROR) = %[@[][&[#[5]]]]
 
 
-Meaning: element 1 is the anchor.
+Patterns describe **structural properties** that may hold in the sensory representation.
 
 ---
 
-### Mirror (%)
+# Program Definitions
 
-Represents bilateral symmetry around a center.
+Programs describe relationships between patterns.
+
+Syntax:
+
+
+PROG(name) = PROG[ relationships ]
+
 
 Example:
 
 
-% [#-1]
+PROG(SYMMETRY) = PROG[
+CENTER :> MIRROR
+]
 
 
-Meaning:
+Programs represent **structural explanations**, not solutions.
 
-the previous element appears in mirrored form.
+Multiple programs may describe the same input.
 
 ---
 
-### Repeat (&)
+# Relationship Operators
 
-Represents repetition of a structural element.
+Programs combine patterns using structural relationships.
+
+
+: coexistence
+:> dependency
+? conditional
+| alternative
+
+
+Examples:
+
+
+A : B
+
+
+Patterns `A` and `B` both hold.
+
+
+A :> B
+
+
+Pattern `B` depends on `A`.
+
+
+A ? C
+
+
+Pattern `A` only applies if `C` holds.
+
+
+A ? C | B
+
+
+If `C` holds use `A`, otherwise use `B`.
+
+---
+
+# Chained Relationships
+
+Relationships may be chained.
 
 Example:
 
 
-&2
+A : B : C
 
-
-Meaning:
-
-repeat the element twice.
-
----
-
-### Grow (#>)
-
-Represents directional growth of a sequence.
 
 Example:
 
 
-#> 1
+A :> B :> C
 
 
-Meaning:
-
-extend the structure forward.
+Chains represent structural relationship graphs.
 
 ---
 
-### Shrink (#<)
+# Named and Anonymous Patterns
 
-Represents contraction of a structure.
+Programs may reference:
 
-Example:
+- named patterns
+- anonymous expressions
 
-
-#< 1
-
-
-Meaning:
-
-reduce the structure by one step.
-
----
-
-## Pattern Expression
-
-Patterns combine operators and references.
-
-Example:
+Named pattern example:
 
 
-% [#-1 #-2]
+PTRN(CENTER) = >[#[8]]
+PTRN(MIRROR) = %[@[][&[#[5]]]]
+
+PROG(SYMMETRY) = PROG[
+CENTER :> MIRROR
+]
 
 
-Meaning:
+Anonymous example:
 
-a mirrored relationship using the previous two elements.
+
+PROG(SYMMETRY) = PROG[
+>[#[8]] :> %[@[][&[#[5]]]]
+]
+
+
+Both forms are valid.
 
 ---
 
-## Example Pattern
+# Design Principles
 
-Input:
+The MERU Pattern Language follows several principles:
 
+1. Minimal operator set  
+2. Uniform syntax (`operator[object]`)  
+3. Machine-first grammar  
+4. Structural descriptions rather than statistical inference  
+5. Multiple interpretations allowed  
 
-om namah shivaya
-shivaya namah om
-
-
-Detected structure:
-
-
-% [#-1]
-
-
-This describes a mirrored pattern around a central reference.
+MERU records all structural patterns that can be detected.  
+It does not attempt to choose a single correct interpretation.
 
 ---
 
-## Goal of MPL
+# Status
 
-MPL aims to express patterns using the **smallest possible symbolic language**.
-
-Instead of large rule systems, patterns are described using:
-
-- operators
-- structural references
-- minimal syntax
+The language is currently experimental and evolving alongside the MERU structural engine.
