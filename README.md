@@ -5,7 +5,13 @@
 Unlike statistical models, MERU analyzes sequences by discovering **structural invariants** such as symmetry, repetition, and growth. These structures are represented on a triad grid and expressed through a small set of operators.
 
 The system is designed to explore how patterns emerge, stabilize, and transform across different inputs.
+**Quick Example**
+PTRN(CENTER) = >[#[8]]
+PTRN(MIRROR) = %[@[][&[#[5]]]]
 
+PROG(SYMMETRY) = PROG[
+    CENTER :> MIRROR
+]
 ---
 
 ## Core Idea
